@@ -33,25 +33,13 @@ uint16_t integer::flip16(uint16_t v) { return flip_impl(v); }
 uint32_t integer::flip32(uint32_t v) { return flip_impl(v); }
 uint64_t integer::flip64(uint64_t v) { return flip_impl(v); }
 
-uint64_t integer::hton64(uint64_t v) {
-#if ! __BIG_ENDIAN__
-    return integer::flip64(v);
-#else
-    return v;
-#endif
-}
+uint64_t integer::hton64(uint64_t v) { return htonll(v); }
 
-uint32_t integer::hton32(uint32_t v) { return ntohl(v); } //NOLINT(hicpp-signed-bitwise)
+uint32_t integer::hton32(uint32_t v) { return htonl(v); } //NOLINT(hicpp-signed-bitwise)
 
-uint16_t integer::hton16(uint16_t v) { return ntohs(v); } //NOLINT(hicpp-signed-bitwise)
+uint16_t integer::hton16(uint16_t v) { return htons(v); } //NOLINT(hicpp-signed-bitwise)
 
-uint64_t integer::ntoh64(uint64_t v) {
-#if ! __BIG_ENDIAN__
-    return integer::flip64(v);
-#else
-    return v;
-#endif
-}
+uint64_t integer::ntoh64(uint64_t v) { return ntohll(v); } //NOLINT(hicpp-signed-bitwise)
 
 uint32_t integer::ntoh32(uint32_t v) { return ntohl(v); } //NOLINT(hicpp-signed-bitwise)
 
